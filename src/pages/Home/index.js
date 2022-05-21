@@ -1,20 +1,19 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
-import { StyleSheet, SafeAreaView, View, Text } from "react-native";
-import { ListItem, Avatar } from "@rneui/themed";
-import { LinearGradient } from "expo-linear-gradient";
-import { Icon } from "@rneui/themed";
-import axios from "axios";
+import { useState , useEffect} from "react";
+import { StyleSheet, SafeAreaView, View, Text} from "react-native";
+import { Avatar } from "@rneui/themed";
 
 export const Home = () => {
   const [curriculo, setCurriculo] = useState({});
 
-  useEffect(() => {
-    axios
-      .get("https://git.heroku.com/curriculo-spring-api.git/curriculo/", )
-      .then((response) => setCurriculo(response.data[0]))
-      .catch((err) => console.log("Erro na requisição: ", err));
-  }, []);
+  useEffect(()=>{
+    fetch('https://curriculo-spring-api.herokuapp.com/curriculo')
+      .then((response) => response.json())
+      .then((json) => setCurriculo(json[0]))
+      .catch((error) => {
+        console.error(error);
+      });
+  },[])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -22,8 +21,7 @@ export const Home = () => {
         <Avatar
           size={200}
           rounded
-          title="AM"
-          containerStyle={{ backgroundColor: "#3d4db7" }}
+          source={require('../../../assets/foto-perfil.jpg')}
         />
       </View>
       <View style={styles.containerTitle}>
