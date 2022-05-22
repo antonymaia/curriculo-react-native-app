@@ -3,7 +3,7 @@ import { useState , useEffect} from "react";
 import { StyleSheet, SafeAreaView, View, Text} from "react-native";
 import { Avatar } from "@rneui/themed";
 
-export const Home = () => {
+export const Home = ({route, navigation}) => {
   const [curriculo, setCurriculo] = useState({});
 
   useEffect(()=>{
@@ -14,7 +14,6 @@ export const Home = () => {
         console.error(error);
       });
   },[])
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.containerAvatar}>
@@ -26,20 +25,20 @@ export const Home = () => {
       </View>
       <View style={styles.containerTitle}>
         <Text style={styles.title}>{curriculo?.nome}</Text>
-        <Text style={styles.subtitle}>{curriculo.posicaoPretendida}</Text>
+        <Text style={styles.subtitle}>{curriculo?.posicaoPretendida}</Text>
       </View>
       <View style={styles.containerDados}>
         <View>
           <Text style={styles.tituloDados}>Dados Pessoais</Text>
         </View>
         <Text style={styles.textDados}>
-          {"Telefone: " + curriculo.telefone}
+          {"Telefone: " + curriculo?.telefone}
         </Text>
         <Text style={styles.textDados}>
-          {"Email: " + curriculo.email}
+          {"Email: " + curriculo?.email}
         </Text>
         <Text style={styles.textDados}>
-          {"Linkedin: " + curriculo.linkLinkedin}
+          {"Linkedin: " + curriculo?.linkLinkedin}
         </Text>
       </View>
     </SafeAreaView>
